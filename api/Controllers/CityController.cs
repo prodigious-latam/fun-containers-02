@@ -14,13 +14,16 @@ namespace api.Controllers
     {
 
         private readonly PagilaContext _pagilaContext;  
-    
-        public CityController(PagilaContext pagilaContext) {  
+        private readonly ILogger<CityController> _logger;
+
+        public CityController(PagilaContext pagilaContext, ILogger<CityController> logger) {  
             _pagilaContext = pagilaContext;  
+            _logger = logger;
         }  
     
         [HttpGet]  
         public async Task <ActionResult<IEnumerable<Country>>> GetCityByCountryID(int country_id) {  
+            _logger.LogInformation($"Fetching city {country_id}");
             return Ok(await _pagilaContext.Cities.Where(x => x.Country_ID == country_id).ToListAsync());  
         }  
 

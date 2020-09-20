@@ -14,13 +14,16 @@ namespace api.Controllers
     {
 
         private readonly PagilaContext _pagilaContext;  
-    
-        public CountryController(PagilaContext pagilaContext) {  
+        private readonly ILogger<CountryController> _logger;
+
+        public CountryController(PagilaContext pagilaContext, ILogger<CountryController> logger) {  
             _pagilaContext = pagilaContext;  
+            _logger = logger;
         }  
     
         [HttpGet]  
         public async Task <ActionResult<IEnumerable<Country>>> GetCountries() {  
+            _logger.LogInformation("Fetching country list");
             return Ok(await _pagilaContext.Countries.ToListAsync());  
         }  
     }
