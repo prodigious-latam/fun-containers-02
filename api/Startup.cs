@@ -16,6 +16,8 @@ namespace api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +29,17 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                builder =>
+                                {
+                                    builder.WithOrigins(Environment.GetEnvironmentVariable("ALLOW_CORS"))
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader();   
+                                });
+            });
 
             services.AddEntityFrameworkNpgsql().AddDbContext<PagilaContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection")));
@@ -43,6 +56,8 @@ namespace api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

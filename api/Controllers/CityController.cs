@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 
 namespace api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors] 
     public class CityController : ControllerBase
     {
 

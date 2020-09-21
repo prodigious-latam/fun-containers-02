@@ -21,9 +21,23 @@ services:
       - webnet
     links:
       - db_container
+    depends_on: 
+      - db_container
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       Logging:LogLevel:Microsoft: Information
       ConnectionStrings:MyWebApiConection: Host=db_container;Database=funcontainers;Username=postgres;Password=mysecretpassword
+      ALLOW_CORS: http://localhost:8080
+  webserver:
+    build: 
+      context: ./web
+      args: 
+        REACT_APP_API_URL: http://localhost:5000
+    ports:
+      - 8080:80
+    depends_on:
+      - apiserver
+    environment: 
+      REACT_APP_API_URL: http://localhost:5000
 networks:
   webnet:

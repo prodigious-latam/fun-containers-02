@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 
 namespace api.Controllers
 {
@@ -21,9 +22,10 @@ namespace api.Controllers
             _logger = logger;
         }  
     
-        [HttpGet]  
+        [HttpGet] 
+        [EnableCors] 
         public async Task <ActionResult<IEnumerable<Country>>> GetCountries() {  
-            _logger.LogInformation("Fetching country list");
+            _logger.LogInformation("Fetching country list allowing " + Environment.GetEnvironmentVariable("ALLOW_CORS"));
             return Ok(await _pagilaContext.Countries.ToListAsync());  
         }  
     }

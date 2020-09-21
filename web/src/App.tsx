@@ -1,9 +1,9 @@
+import { CountryCities } from 'CountryCities/CountryCities';
 import React from 'react';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <CountryCities />
   );
 }
 
