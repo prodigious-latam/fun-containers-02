@@ -25,7 +25,9 @@ The Dockerfile provided automatically restores the data into the database when t
 
 ## React application
 
-Run this tool in order to scaffold the project
+This project was scaffolded using this command:
 ```
 npx create-react-app my-react-app --template typescript
 ```
+
+Browse to the app by visiting [http://localhost:8080](http://localhost:8080)
