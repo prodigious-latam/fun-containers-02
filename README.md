@@ -1,6 +1,15 @@
 # fun-containers-02
 First example for Fun with Containers session (Docker Compose) 
 
+## How to run the project
+
+Execute the following command from the terminal
+
+```
+docker-compose up
+```
+
+
 ## API Project Creation
 
 - Install [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
