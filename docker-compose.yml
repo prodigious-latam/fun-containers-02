@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   db_container:
-    image: database
+    image: f2_database
     build: ./db
     ports:
       - 5432:5432
@@ -13,7 +13,7 @@ services:
     networks:
       - webnet
   apiserver:
-    image: api
+    image: f2_api
     build: ./api
     ports:
       - 5000:80
@@ -29,6 +29,7 @@ services:
       ConnectionStrings:MyWebApiConection: Host=db_container;Database=funcontainers;Username=postgres;Password=mysecretpassword
       ALLOW_CORS: http://localhost:8080
   webserver:
+    image: f2_web
     build: 
       context: ./web
       args: 
